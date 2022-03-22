@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="hamburger.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | E-commerce product page</title>
+
+  
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-left">
+        <img class="hamburger-icon" onclick="toggleMenu()" src="images/icon-menu.svg">
+        
+        <img class="header-logo" src="images/logo.svg">
+        <div class="header-navs">
+          <label>Collections</label>
+          <label>Men</label>
+          <label>Women</label>
+          <label>About</label>
+          <label>Contact</label>
+        </div>
+  
+      </div>
+      <div class="header-right">
+        <span class="cart-article-number">10</span>
+        <img class="header-cart" src="images/icon-cart.svg">
+        <img class="header-avatar" src="images/image-avatar.png">
+      </div>
+      
+    </div>
+  
+    <hr>
+
+    <div class="article-container">
+      <div class="article-image-container">
+        <img class="article-image" src="images/image-product-1.jpg">
+        <div class="previews-container">
+          <img onclick="changeImage(1)" src="images/image-product-1.jpg">
+          <img onclick="changeImage(2)" src="images/image-product-2.jpg">
+          <img onclick="changeImage(3)" src="images/image-product-3.jpg">
+          <img onclick="changeImage(4)" src="images/image-product-4.jpg">
+        </div>
+      </div>
+  
+      <div class="article-infos">
+        <h3>SNEAKER COMPANY</h3>
+        <h1>Fall Limited Edition Sneakers</h1>
+        <p>These low-profile sneakers are your perfect casual wear companion. Featuring a 
+          durable rubber outer sole, they’ll withstand everything the weather can offer.
+        </p>
+        <div class="price-container">
+          <div class="price-reduction-container">
+            <h1>$125.00</h1>
+            <span class="price-reduction">50%</span>
+          </div>
+          <span class="price-previous">$250.00</span>
+        </div>
+  
+        <div class="actions-container">
+          <div class="article-number-container">
+            <img onclick="decrement()" class="quantity-icon" src="images\icon-minus.svg">
+            <label class="label-quantity">0</label>
+            <img onclick="increment()" class="quantity-icon" src="images\icon-plus.svg">
+          </div>
+          <button onclick="addItemToCart()" class="button-add-cart">
+            <img class="cart-icon" src="images\icon-cart copy.svg"> 
+            <span>Add To Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+
+
+  <div class="overlay"></div>
+  <div class="hamburger-menu">
+    <img onclick="toggleMenu()" class="icon-close" src="images/icon-close.svg">
+    <label>Collections</label>
+    <label>Men</label>
+    <label>Women</label>
+    <label>About</label>
+    <label>Contact</label>
+  </div>
+
+
+  <div class="cart-popover">
+    <h2>Cart</h2>
+    <hr>
+    <div class="cart-content">
+      <button onclick="addItemToCart()" class="button-add-cart">
+        <img class="cart-icon" src="images\icon-cart copy.svg"> 
+        <span>Add To Cart</span>
+      </button>
+    </div>
+    
+  </div>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
