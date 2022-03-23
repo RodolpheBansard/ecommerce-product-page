@@ -25,7 +25,12 @@
 
   <div class="article-container">
     <div class="article-image-container">
-      <img class="article-image" src="{{articleImageSrc}}">
+      <div class="carousel-image">
+        <img (click)="toggleCarousel()" class="article-image" src="{{articleImageSrc}}">
+        <img (click)="previousImage()" class="left-Arrow-mobile" src="../assets/images/icon-previous.svg">
+        <img (click)="nextImage()" class="right-Arrow-mobile" src="../assets/images/icon-next.svg">
+      </div>
+      
       <div class="previews-container">
         <img (click)="changeImage(1)" src="../assets/images/image-product-1.jpg">
         <img (click)="changeImage(2)" src="../assets/images/image-product-2.jpg">
@@ -63,6 +68,24 @@
   </div>
 </div>
 
+
+<div *ngIf="carouselIsOpen" class="modal-carousel">
+  <div class="article-image-container">
+    <img (click)="toggleCarousel()" class="icon-close" src="../assets/images/icon-close-white.svg">
+    <div class="carousel-image">
+      <img class="article-image" src="{{articleImageSrc}}">
+      <img (click)="previousImage()" class="left-Arrow-mobile" src="../assets/images/icon-previous.svg">
+      <img (click)="nextImage()" class="right-Arrow-mobile" src="../assets/images/icon-next.svg">
+    </div>
+    
+    <div class="previews-container">
+      <img (click)="changeImage(1)" src="../assets/images/image-product-1.jpg">
+      <img (click)="changeImage(2)" src="../assets/images/image-product-2.jpg">
+      <img (click)="changeImage(3)" src="../assets/images/image-product-3.jpg">
+      <img (click)="changeImage(4)" src="../assets/images/image-product-4.jpg">
+    </div>
+  </div>
+</div>
 
 
 

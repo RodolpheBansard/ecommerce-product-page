@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 export interface Article{
   price : number;
@@ -13,14 +13,28 @@ export interface Article{
 })
 export class AppComponent {
 
+  public screenSize = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    if(event.target.innerWidth < 700){
+      this.screenSize =  window.innerWidth;
+      this.carouselIsOpen = false;
+    }
+    else{
+      this.screenSize =  window.innerWidth;
+    }
+  }
+
   public quantity = 1;
   public articlePrice= 150;
-  public currentImageIndex= 0;
+  public currentImageIndex= 1;
   public cartArticleNumber = 0;
   public articleImageSrc = "../assets/images/image-product-1.jpg";
 
   hamburgerIsOpen = false;
   cartIsOpen = false
+  carouselIsOpen =false;
   
   public cartArticles : Article[] = []
   
@@ -70,6 +84,33 @@ export class AppComponent {
       if(this.quantity > 1){
           this.quantity--;
       }    
+  }
+
+  previousImage(){
+    if(this.currentImageIndex == 1){
+      this.currentImageIndex = 4;
+    }
+    else{
+      this.currentImageIndex--;
+    }
+    this.articleImageSrc = "../assets/images/image-product-"+  this.currentImageIndex +".jpg";
+  }
+  nextImage(){
+    if(this.currentImageIndex == 4){
+      this.currentImageIndex = 1;
+    }
+    else{
+      this.currentImageIndex++;
+    }
+    this.articleImageSrc = "../assets/images/image-product-"+  this.currentImageIndex +".jpg";
+  }
+
+  toggleCarousel(){
+    console.log(this.screenSize);
+    if(this.screenSize > 700){
+      this.carouselIsOpen = !this.carouselIsOpen
+    }
+    
   }
 
 
