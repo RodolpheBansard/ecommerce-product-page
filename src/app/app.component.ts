@@ -1,61 +1,76 @@
 import { Component } from '@angular/core';
 
+export interface Article{
+  price : number;
+  quantity : number;
+  imageName: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  // const hamburgerMenu = document.querySelector(".hamburger-menu");
-  // const overlay = document.querySelector(".overlay");
-  // const closeIcon = document.querySelector(".close-icon");
+
+  public quantity = 1;
+  public articlePrice= 150;
+  public currentImageIndex= 0;
+  public cartArticleNumber = 0;
+  public articleImageSrc = "../assets/images/image-product-1.jpg";
+
+  hamburgerIsOpen = false;
+  cartIsOpen = false
   
-  // const articleImage = document.querySelector(".article-image");
+  public cartArticles : Article[] = []
   
-  // const quantity = document.querySelector(".label-quantity");
-  // quantity.value = 0;
-  // quantity.innerHTML = 0;
-  // const cartArticleNumber = document.querySelector(".cart-article-number");
-  // cartArticleNumber.value = 0;
-  // cartArticleNumber.innerHTML = 0;
+  toggleMenu(){
+      this.hamburgerIsOpen = !this.hamburgerIsOpen;
+      if(this.cartIsOpen){
+        this.cartIsOpen = false;
+      }
+  }
+
+  toggleCart(){
+    this.cartIsOpen = !this.cartIsOpen;
+  }
+
+  closeModal(){
+    this.cartIsOpen = false;
+    this.hamburgerIsOpen = false;
+  }
   
-  // let currentImageIndex=0;
-  // let articlePrice = 150;
-  // let articleQuantity = 0;
-  // let cartItems = []
+  changeImage(value:number){
+      this.articleImageSrc = "../assets/images/image-product-" + value + ".jpg";
+  }
   
-  // function toggleMenu(){
-  //     hamburgerMenu.classList.toggle("active");
-  //     overlay.classList.toggle("active");
-  // }
-  
-  // function changeImage(value){
-  //     articleImage.src = "images/image-product-" + value + ".jpg";
-  // }
-  
-  // function addItemToCart(){
-  //     if(quantity.value>0){
-  //         cartItems.push(
-  //             {
-  //                 article:articlePrice,
-  //                 qauntity:quantity.value
-  //             }
-  //         );
-  //         cartArticleNumber.value = cartArticleNumber.value + 1;
-  //         cartArticleNumber.innerHTML = cartArticleNumber.value;
-  //     }
+  addItemToCart(){
+      if(this.quantity>0){
+          this.cartArticles.push(
+              {
+                  price:this.articlePrice,
+                  quantity:this.quantity,
+                  imageName: '../assets/images/image-product-' + 4 + '.jpg'
+              }
+          );
+          this.cartArticleNumber++;
+      }
       
-  // }
+  }
+
+  deleteArticleFormCart(index:number){
+    this.cartArticles.splice(index,1)
+  }
   
-  // function increment(){
-  //     quantity.value = quantity.value + 1;
-  //     quantity.innerHTML = quantity.value;
-  // }
+  increment(){
+      this.quantity++;
+  }
   
-  // function decrement(){
-  //     if(quantity.value > 0){
-  //         quantity.value = quantity.value - 1;
-  //         quantity.innerHTML = quantity.value;
-  //     }    
-  // }
+  decrement(){
+      if(this.quantity > 1){
+          this.quantity--;
+      }    
+  }
+
+
 }

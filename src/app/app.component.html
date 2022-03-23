@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <div class="header-left">
-      <img class="hamburger-icon" onclick="toggleMenu()" src="../assets/images/icon-menu.svg">
+      <img class="hamburger-icon" (click)="toggleMenu()" src="../assets/images/icon-menu.svg">
       
       <img class="header-logo" src="../assets/images/logo.svg">
       <div class="header-navs">
@@ -14,8 +14,8 @@
 
     </div>
     <div class="header-right">
-      <span class="cart-article-number">10</span>
-      <img class="header-cart" src="../assets/images/icon-cart.svg">
+      <span (click)="toggleCart()" class="cart-article-number">{{cartArticleNumber}}</span>
+      <img (click)="toggleCart()" class="header-cart" src="../assets/images/icon-cart.svg">
       <img class="header-avatar" src="../assets/images/image-avatar.png">
     </div>
     
@@ -25,12 +25,12 @@
 
   <div class="article-container">
     <div class="article-image-container">
-      <img class="article-image" src="../assets/images/image-product-1.jpg">
+      <img class="article-image" src="{{articleImageSrc}}">
       <div class="previews-container">
-        <img onclick="changeImage(1)" src="../assets/images/image-product-1.jpg">
-        <img onclick="changeImage(2)" src="../assets/images/image-product-2.jpg">
-        <img onclick="changeImage(3)" src="../assets/images/image-product-3.jpg">
-        <img onclick="changeImage(4)" src="../assets/images/image-product-4.jpg">
+        <img (click)="changeImage(1)" src="../assets/images/image-product-1.jpg">
+        <img (click)="changeImage(2)" src="../assets/images/image-product-2.jpg">
+        <img (click)="changeImage(3)" src="../assets/images/image-product-3.jpg">
+        <img (click)="changeImage(4)" src="../assets/images/image-product-4.jpg">
       </div>
     </div>
 
@@ -50,12 +50,12 @@
 
       <div class="actions-container">
         <div class="article-number-container">
-          <img onclick="decrement()" class="quantity-icon" src="../assets/images/icon-minus.svg">
-          <label class="label-quantity">0</label>
-          <img onclick="increment()" class="quantity-icon" src="../assets/images/icon-plus.svg">
+          <img (click)="decrement()" class="quantity-icon" src="../assets/images/icon-minus.svg">
+          <label class="label-quantity">{{quantity}}</label>
+          <img (click)="increment()" class="quantity-icon" src="../assets/images/icon-plus.svg">
         </div>
-        <button onclick="addItemToCart()" class="button-add-cart">
-          <img class="cart-icon" src="../assets/images/icon-cart copy.svg"> 
+        <button (click)="addItemToCart()" class="button-add-cart">
+          <img class="cart-icon" src="../assets/images/icon-cart-white.svg"> 
           <span>Add To Cart</span>
         </button>
       </div>
@@ -68,9 +68,9 @@
 
 
 
-<div class="overlay"></div>
-<div class="hamburger-menu">
-  <img onclick="toggleMenu()" class="icon-close" src="../assets/images/icon-close.svg">
+<div (click)="closeModal()" [ngClass]="{'active': hamburgerIsOpen}" class="overlay"></div>
+<div [ngClass]="{'active': hamburgerIsOpen}" class="hamburger-menu">
+  <img (click)="toggleMenu()" class="icon-close" src="../assets/images/icon-close.svg">
   <label>Collections</label>
   <label>Men</label>
   <label>Women</label>
@@ -79,14 +79,37 @@
 </div>
 
 
-<div class="cart-popover">
+<div *ngIf="cartIsOpen" class="cart-popover">
   <h2>Cart</h2>
   <hr>
+
+  
   <div class="cart-content">
-    <button onclick="addItemToCart()" class="button-add-cart">
-      <img class="cart-icon" src="images\icon-cart copy.svg"> 
-      <span>Add To Cart</span>
-    </button>
+    <div style="display: flex; flex-direction: column; gap: 1rem;" *ngIf="cartArticles.length > 0" >
+      <div class="cart-article" *ngFor="let article of cartArticles; let index = index">
+        <div style="display: flex; flex-direction: row; align-items: center;gap: 1rem;">
+          <img class="cart-article-image" src="{{article.imageName}}">
+          <div style="display: flex; flex-direction: column;">
+            <span>Fall Limited Edition Sneakers</span>
+            <span>${{articlePrice}} x {{article.quantity}} : <strong>${{articlePrice*article.quantity}}</strong></span>
+          </div>
+        </div>
+        
+      
+        <img (click)="deleteArticleFormCart(index)" class="cart-article-delete" src="../assets/images/icon-delete.svg">
+        
+      </div>
+      <button class="button-add-cart">
+        <img class="cart-icon" src="../assets/images/icon-cart-white.svg"> 
+        <span>Add To Cart</span>
+      </button>
+    </div>
+
+    <div class="empty-cart" *ngIf="cartArticles.length <= 0" >
+      <p>Your cart is empty</p>
+    </div>
+    
+    
   </div>
   
 </div>
